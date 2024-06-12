@@ -48,7 +48,7 @@ To run the comparison of the different graph storage solutions on YAGO4English, 
 The results  of the benchmark (IGUANA result files, one per system) are stored in the directory `<target_dir>/iguana_results/sparql`
 
 ## Datataset and Query Prepartion
-The code that was used to generate class expressions/queries and prepare the datasets is available [here](https://files.dice-research.org/projects/tentris-alc2sparql/ecml-helper-code).
+The code that was used to generate class expressions/queries and prepare the datasets is available [here](https://files.dice-research.org/projects/tentris-alc2sparql/ecml-helper-code.zip).
 
 ## Datasets and Queries
 The datasets and the queries used in the experimental results are available in the following links:
