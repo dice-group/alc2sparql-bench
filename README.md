@@ -14,12 +14,13 @@ Ansible 2.16.4 is used for these experiments.
  - Replace ```<ansible-temp-directory>``` in ```ansible_playbook/ansible.cfg``` with the absolute path to the directory that will be used as a temporary directory for ansible.
  - Download the free version of GraphDB 10.3.3 and add it to `ansible_playbook/roles/graphdb/files`.
 
-## Playbook Execution
-You can execute the playbook by issuing the following command within the `ansible_playbook` directory:
+## Playbook Execution (User's machine)
+After cloning the repository, you can execute the playbook by issuing the following command within the `ansible_playbook` directory:
 
     ansible-playbook -kKi inventory.yaml playbook.yaml
+## Benchmark Execution (Server)
+The following commands are to be executed on the managed node (i.e., the server that will run the experiments).
 
-## Benchmark Execution
 Before running the benchmarks:
 
 - Make the Tentris binary an executable
