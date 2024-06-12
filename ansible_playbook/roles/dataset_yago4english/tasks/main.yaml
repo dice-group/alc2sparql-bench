@@ -1,0 +1,28 @@
+- name: Check for the yago4english directory
+  stat:
+    path: "{{ target_dir }}/datasets/yago4english"
+  register: dataset_dir
+
+- block:
+  - name: Create dataset directory 
+    file:
+      path: "{{ target_dir }}/datasets/yago4english/"
+      state: directory
+
+  - name: Create a temporary download directory
+    tempfile:
+      state: directory
+      suffix: yago4english
+    register: tempdir
+
+  - name: Download YAGO4English data
+    get_url:
+      url: https://files.dice-research.org/projects/tentris-alc2sparql/yago4english.zip
+      dest: "{{ tempdir.path }}/yago4english.zip"
+
+  - name: Unzip dataset and queries
+    unarchive:
+      remote_src: yes
+      src: "{{ tempdir.path }}/yago4english.zip"
+      dest: "{{ target_dir }}/datasets/yago4english/"
+  when: not dataset_dir.stat.exists

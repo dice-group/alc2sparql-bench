@@ -1,0 +1,28 @@
+- name: Check for the mutagenesis directory
+  stat:
+    path: "{{ target_dir }}/datasets/mutagenesis"
+  register: dataset_dir
+
+- block:
+  - name: Create dataset directory 
+    file:
+      path: "{{ target_dir }}/datasets/mutagenesis/"
+      state: directory
+
+  - name: Create a temporary download directory
+    tempfile:
+      state: directory
+      suffix: mutagenesis
+    register: tempdir
+
+  - name: Download Mutagenesis data
+    get_url:
+      url: https://files.dice-research.org/projects/tentris-alc2sparql/mutagenesis.zip
+      dest: "{{ tempdir.path }}/mutagenesis.zip"
+
+  - name: Unzip dataset and queries
+    unarchive:
+      remote_src: yes
+      src: "{{ tempdir.path }}/mutagenesis.zip"
+      dest: "{{ target_dir }}/datasets/mutagenesis/"
+  when: not dataset_dir.stat.exists

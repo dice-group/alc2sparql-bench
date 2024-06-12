@@ -1,0 +1,14 @@
+iguana_http_connections:
+  - number: 1
+
+iguana_query_mixes_limit: 3
+iguana_query_timeout: 500000 # higher timeout value to let systems cancel queries on their own
+systems_http:
+  - name: fuseki
+    connection_url: http://localhost:3030/%d/sparql
+  - name: virtuoso
+    connection_url: http://localhost:8890/sparql
+  - name: graphdb
+    connection_url: http://localhost:7200/repositories/%d
+  - name: blazegraph
+    connection_url: http://localhost:9999/blazegraph/sparql

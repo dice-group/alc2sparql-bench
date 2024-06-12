@@ -1,0 +1,28 @@
+- name: Check for the vicodi directory
+  stat:
+    path: "{{ target_dir }}/datasets/vicodi"
+  register: dataset_dir
+
+- block:
+  - name: Create dataset directory 
+    file:
+      path: "{{ target_dir }}/datasets/vicodi/"
+      state: directory
+
+  - name: Create a temporary download directory
+    tempfile:
+      state: directory
+      suffix: vicodi
+    register: tempdir
+
+  - name: Download Vicodi data
+    get_url:
+      url: https://files.dice-research.org/projects/tentris-alc2sparql/vicodi.zip
+      dest: "{{ tempdir.path }}/vicodi.zip"
+
+  - name: Unzip dataset and queries
+    unarchive:
+      remote_src: yes
+      src: "{{ tempdir.path }}/vicodi.zip"
+      dest: "{{ target_dir }}/datasets/vicodi/"
+  when: not dataset_dir.stat.exists

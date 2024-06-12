@@ -1,0 +1,17 @@
+- name: Copy run-loaders script
+  template:
+    src: run-loaders.sh
+    dest: "{{ target_dir }}"
+    mode: 0755
+
+- name: Copy run-sparql script (datasets for class expression learning)
+  template:
+    src: run-sparql-cel.sh
+    dest: "{{ target_dir }}"
+    mode: 0755
+
+- name: Copy run-sparql script (yago4english)
+  template:
+    src: run-sparql-yago.sh
+    dest: "{{ target_dir }}"
+    mode: 0755
